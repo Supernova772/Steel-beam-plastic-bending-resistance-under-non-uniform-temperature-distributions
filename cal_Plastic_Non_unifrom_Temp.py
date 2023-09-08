@@ -1,3 +1,25 @@
+def y_neutral_stre(y_neutral,stre_dist):
+    for i in range(len(stre_dist)-1):
+        if stre_dist[i][1]<=y_neutral and stre_dist[i+1][1]>y_neutral:
+            y_neutral_stre=(y_neutral-stre_dist[i][1])*(stre_dist[i+1][0]-stre_dist[i][0])/(stre_dist[i+1][1]-stre_dist[i][1])+stre_dist[i][0]
+    return y_neutral_stre
+def interpolation(a,stre_dist):
+    for i in  range(len(stre_dist)-1):
+        if stre_dist[i][1] <= a and stre_dist[i+1][1] > a:
+            y_inter = (a-stre_dist[i][1])*(stre_dist[i+1][0]-stre_dist[i][0])/(stre_dist[i+1][1]-stre_dist[i][1])+stre_dist[i][0]
+    return y_inter
+def stre_red(temp):
+    coefficient=[[20,1],[100,1],[200,1],[300,1],[400,1],[500,0.78],[600,0.47],[700,0.23],[800,0.11],[900,0.06],[1000,0.04],[1100,0.02],[1200,0]]
+    for i in range(len(coefficient)-1):
+        if temp >= coefficient[i][0] and temp < coefficient[i+1][0]:
+            co_of_red = (temp-coefficient[i][0])/(coefficient[i+1][0]-coefficient[i][0])*(coefficient[i+1][1]-coefficient[i][1])+coefficient[i][1]
+    return co_of_red
+def intemp(a,b,c):
+    d_temp=(a-b[0])*(b[1]-c[1])/(b[0]-c[0])+b[1]
+    return d_temp
+def Sort(sub_li):
+    sub_li.sort(key = lambda x: x[1])
+    return sub_li
 def plastic_bending_moment(d,w,tf,tw,tempdist,fpl,E,Iz,Iw,It,Wpl,G):
     add=[]
     for i in range(len(tempdist)-1):
